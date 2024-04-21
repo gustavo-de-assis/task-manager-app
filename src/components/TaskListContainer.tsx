@@ -8,7 +8,15 @@ export default function TaskListContainer() {
         <MdFilterAlt />
         <p className="text-[10px]">Filtros</p>
       </div>
-      <section className="flex flex-col items-center w-full gap-3">
+      <section className="flex flex-col items-center w-full h-3/5 overflow-y-scroll gap-3 pt-1">
+        <Task></Task>
+        <Task></Task>
+        <Task></Task>
+        <Task></Task>
+        <Task></Task>
+        <Task></Task>
+        <Task></Task>
+        <Task></Task>
         <Task></Task>
         <Task></Task>
         <Task></Task>
