@@ -1,21 +1,25 @@
 import { TbEyeSearch, TbPencilMinus, TbTrash } from "react-icons/tb";
+import IconButton from "./IconButton";
 
 type TaskProps = {
   title: string;
   deadline: string;
+  modalHandler: (visibility: string, newModalType: string) => void;
 };
 
-export default function Task(props: TaskProps) {
-  const { title, deadline } = props;
-
+export default function Task({ title, deadline, modalHandler }: TaskProps) {
   return (
     <main className="flex flex-row justify-between items-center w-11/12 min-h-5 max-h-5 border-b-2 border-black relative">
       <span className="flex absolute left-1 gap-1">
-        <TbEyeSearch />
-        <h2 className="text-sm ml-1">{title}Título tarefa</h2>
+        <IconButton
+          Icon={TbEyeSearch}
+          handler={() => modalHandler("visible", "view")}
+          size={20}
+        />
+        <h2 className="text-sm ml-1">{title}</h2>
       </span>
       <span className="flex absolute right-1 gap-1">
-        <h2 className="text-xs">{deadline} 24/12/2024</h2>
+        <h2 className="text-xs">{deadline}</h2>
         <TbTrash />
       </span>
     </main>
