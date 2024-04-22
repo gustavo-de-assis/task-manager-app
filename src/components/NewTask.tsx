@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import IconButton from "./IconButton";
+import { BsSendCheck } from "react-icons/bs";
 
 export default function NewTask() {
   const [taskInfo, setTaskInfo] = useState({
@@ -62,10 +64,13 @@ export default function NewTask() {
               });
             }}
           />
-          <button className="bg-blue-500 h-7 w-7 rounded mr-3" type="submit">
-            {" "}
-            OK{" "}
-          </button>
+          <div className="h-7 w-7 rounded mr-3">
+            <IconButton
+              Icon={BsSendCheck}
+              handler={() => formHandler}
+              size={20}
+            />
+          </div>
         </div>
       </form>
     </main>
