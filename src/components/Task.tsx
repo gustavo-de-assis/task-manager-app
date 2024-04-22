@@ -7,7 +7,18 @@ type TaskProps = {
   modalHandler: (visibility: string, newModalType: string) => void;
 };
 
-export default function Task({ title, deadline, modalHandler }: TaskProps) {
+export default function Task({
+  title,
+  deadline,
+  modalHandler,
+}: Readonly<TaskProps>) {
+  const deadlineDate = new Date(deadline);
+  const formattedDeadline = deadlineDate.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
   return (
     <main className="flex flex-row justify-between items-center w-11/12 min-h-5 max-h-5 border-b-2 border-black relative">
       <span className="flex absolute left-1 gap-1">
@@ -19,7 +30,7 @@ export default function Task({ title, deadline, modalHandler }: TaskProps) {
         <h2 className="text-sm ml-1">{title}</h2>
       </span>
       <span className="flex absolute right-1 gap-1">
-        <h2 className="text-xs">{deadline}</h2>
+        <h2 className="text-xs">{formattedDeadline}</h2>
         <TbTrash />
       </span>
     </main>
