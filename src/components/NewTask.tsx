@@ -3,6 +3,7 @@
 import { useState } from "react";
 import IconButton from "./IconButton";
 import { BsSendCheck } from "react-icons/bs";
+import axios from "axios";
 
 export default function NewTask() {
   const [taskInfo, setTaskInfo] = useState({
@@ -11,8 +12,16 @@ export default function NewTask() {
     deadline: "",
   });
 
-  function formHandler(e: React.ChangeEvent<HTMLFormElement>): void {
+  async function formHandler(
+    e: React.ChangeEvent<HTMLFormElement>
+  ): Promise<void> {
     e.preventDefault();
+    try {
+      const url = "http://localhost:4000/tasks";
+      await axios.post(url, taskInfo);
+    } catch (error) {
+      console.log(error.response);
+    }
     console.log("Informações da tarefa:", taskInfo);
   }
 

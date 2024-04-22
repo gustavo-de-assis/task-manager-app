@@ -1,4 +1,4 @@
-import { TbEyeSearch, TbPencilMinus, TbTrash } from "react-icons/tb";
+import { TbEyeSearch, TbTrash } from "react-icons/tb";
 import IconButton from "./IconButton";
 
 type TaskProps = {
