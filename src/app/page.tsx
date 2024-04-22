@@ -3,12 +3,19 @@
 import Modal from "@/components/Modal";
 import NewTaskButton from "@/components/NewTaskButton";
 import TaskListContainer from "@/components/TaskListContainer";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface ModalType {
   visible: string;
   type: string;
 }
+
+type Task = {
+  title: string;
+  description: string;
+  deadline: string;
+};
 
 export default function Home() {
   const [modalType, setModalType] = useState<ModalType>({
