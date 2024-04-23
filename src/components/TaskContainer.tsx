@@ -1,10 +1,12 @@
 import { TbEyeSearch, TbTrash } from "react-icons/tb";
 import IconButton from "./IconButton";
-import { ModalInfo, TaskContainerProps } from "@/types";
-import { ReactNode } from "react";
+import { TaskContainerProps } from "@/types";
+import { ReactNode, useContext } from "react";
+import { TaskContext } from "@/contexts/TaskContext";
 
 export default function TaskContainer(props: TaskContainerProps): ReactNode {
   const { modal, task } = props;
+  const { setTask } = useContext(TaskContext);
   const deadlineDate = new Date(props.task.deadline);
   const formattedDeadline = deadlineDate.toLocaleDateString("pt-BR", {
     day: "2-digit",
@@ -13,7 +15,7 @@ export default function TaskContainer(props: TaskContainerProps): ReactNode {
   });
 
   const modalSetter = () => {
-    modal.setModal({ visibility: "visible", type: "view" });
+    setTask(task);
   };
 
   return (

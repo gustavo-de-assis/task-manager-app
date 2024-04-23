@@ -4,21 +4,15 @@ import { useEffect, useState } from "react";
 import IconButton from "./IconButton";
 import { BsSendCheck } from "react-icons/bs";
 import axios from "axios";
+import { TaskModel } from "@/types";
 
-interface TaskInfo {
-  id: number;
-  title: string;
-  description: string;
-  deadline: string;
-}
+type TaskParams = Omit<TaskModel, "id">;
 
-type TaskParams = Omit<TaskInfo, "id">;
-
-export default function NewTask({ info }: { info?: TaskInfo }) {
+export default function NewTask({ info }: { info?: TaskModel }) {
   const [taskInfo, setTaskInfo] = useState<TaskParams>({
-    title: info?.title || "",
-    description: info?.description || "",
-    deadline: info?.deadline || "",
+    title: "",
+    description: "",
+    deadline: "",
   });
 
   useEffect(() => {
