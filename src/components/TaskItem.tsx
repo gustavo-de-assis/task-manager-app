@@ -4,9 +4,10 @@ import { TaskModel } from "@/types";
 import { ReactNode, useContext } from "react";
 import { ModalContext } from "@/contexts/ModalContext";
 import { TaskContext } from "@/contexts/TaskContext";
+import axios from "axios";
 
 export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
-  const { title, deadline } = props;
+  const { title, deadline, id } = props;
   const { setModal } = useContext(ModalContext);
   const { setSelectedTask } = useContext(TaskContext);
 
@@ -16,6 +17,18 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
     month: "2-digit",
     year: "numeric",
   });
+
+  async function deleteTask() {
+    const url = `http://localhost:4000/tasks/${id}`;
+    await axios
+      .delete(url)
+      .then((ans) => {
+        console.log(ans.data);
+      })
+      .catch((e) => {
+        console.log(e.response.data);
+      });
+  }
 
   return (
     <main className="flex flex-row justify-between items-center w-11/12 min-h-5 max-h-5 border-b-2 border-black relative">
@@ -32,7 +45,7 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
       </span>
       <span className="flex absolute right-1 gap-1">
         <h2 className="text-xs">{formattedDeadline}</h2>
-        <TbTrash />
+        <IconButton Icon={TbTrash} handler={deleteTask} size={20} />
       </span>
     </main>
   );
