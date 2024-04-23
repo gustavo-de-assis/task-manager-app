@@ -1,16 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IconButton from "./IconButton";
 import { BsSendCheck } from "react-icons/bs";
 import axios from "axios";
 
-export default function NewTask() {
-  const [taskInfo, setTaskInfo] = useState({
-    title: "",
-    description: "",
-    deadline: "",
+interface TaskInfo {
+  id: number;
+  title: string;
+  description: string;
+  deadline: string;
+}
+
+type TaskParams = Omit<TaskInfo, "id">;
+
+export default function NewTask({ info }: { info?: TaskInfo }) {
+  const [taskInfo, setTaskInfo] = useState<TaskParams>({
+    title: info?.title || "",
+    description: info?.description || "",
+    deadline: info?.deadline || "",
   });
+
+  useEffect(() => {
+    if (info) {
+      setTaskInfo({
+        title: info.title || "",
+        description: info.description || "",
+        deadline: info.deadline || "",
+      });
+    }
+
+    console.log(info);
+  }, [info]);
 
   async function formHandler(
     e: React.ChangeEvent<HTMLFormElement>

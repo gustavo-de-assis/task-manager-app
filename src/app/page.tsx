@@ -3,44 +3,41 @@
 import Modal from "@/components/Modal";
 import NewTaskButton from "@/components/NewTaskButton";
 import TaskListContainer from "@/components/TaskListContainer";
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-interface ModalType {
-  visible: string;
-  type: string;
-}
-
-type Task = {
-  title: string;
-  description: string;
-  deadline: string;
-};
+import { useState } from "react";
 
 export default function Home() {
-  const [modalType, setModalType] = useState<ModalType>({
-    visible: "invisible",
+  const [modalType, setModalType] = useState<ModalInfo>({
+    visibility: "invisible",
     type: "view",
   });
 
-  const modalHandler = (visibility: string, newModalType: string) => {
+  const modalHandler = (visibility: string, type: string) => {
     setModalType({
-      visible: visibility,
-      type: newModalType,
+      visibility,
+      type,
     });
   };
 
   return (
+    //APP
     <main className="w-full h-full">
-      <section className={`absolute z-10 ${modalType.visible}`}>
+      {/*MODAL*/}
+      <section className={`absolute z-10 ${modalType.visibility}`}>
         <Modal modalHandler={modalHandler} type={modalType.type} />
       </section>
-      <div className={modalType.visible === "visible" ? `filter blur-sm` : ""}>
+
+      {/*CONTENT*/}
+      <div
+        className={modalType.visibility === "visible" ? `filter blur-sm` : ""}
+      >
         <header className="flex justify-center pt-8 mb-14">
           <h1 className="font-normal text-5xl">To Do List</h1>
         </header>
         <section className="flex flex-col items-center gap-5">
+          {/*CONTAINER DE TAREFAS*/}
           <TaskListContainer modalHandler={modalHandler} />
+
+          {/*BOTÃO NOVA TAREFA */}
           <aside className="flex flex-col items-center w-36 h-36 gap-3">
             <h2 className="font-normal text-xl">Nova Tarefa</h2>
             <NewTaskButton modalHandler={modalHandler} />

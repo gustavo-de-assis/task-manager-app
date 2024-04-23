@@ -1,18 +1,23 @@
 import { TbEyeSearch, TbTrash } from "react-icons/tb";
 import IconButton from "./IconButton";
 
-type TaskProps = {
+interface Task {
   title: string;
+  description: string;
   deadline: string;
-  modalHandler: (visibility: string, newModalType: string) => void;
+}
+
+type TaskProps = {
+  task: Task;
+  modalHandler: (
+    visibility: string,
+    newModalType: string,
+    taskInfo: Task
+  ) => void;
 };
 
-export default function Task({
-  title,
-  deadline,
-  modalHandler,
-}: Readonly<TaskProps>) {
-  const deadlineDate = new Date(deadline);
+export default function Task({ task, modalHandler }: Readonly<TaskProps>) {
+  const deadlineDate = new Date(task.deadline);
   const formattedDeadline = deadlineDate.toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "2-digit",
@@ -24,10 +29,10 @@ export default function Task({
       <span className="flex absolute left-1 gap-1">
         <IconButton
           Icon={TbEyeSearch}
-          handler={() => modalHandler("visible", "view")}
+          handler={() => modalHandler("visible", "view", task)}
           size={20}
         />
-        <h2 className="text-sm ml-1">{title}</h2>
+        <h2 className="text-sm ml-1">{task.title}</h2>
       </span>
       <span className="flex absolute right-1 gap-1">
         <h2 className="text-xs">{formattedDeadline}</h2>

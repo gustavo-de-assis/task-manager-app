@@ -28,7 +28,6 @@ export default function TaskListContainer({
       .catch((err) => {
         alert(err.response.data.message);
       });
-    console.log(taskList);
   }, []);
 
   return (
@@ -39,12 +38,7 @@ export default function TaskListContainer({
       </div>
       <section className="flex flex-col items-center w-full h-3/5 overflow-y-scroll gap-3 pt-1">
         {taskList.map((task, idx) => (
-          <Task
-            title={task.title}
-            deadline={task.deadline}
-            key={idx}
-            modalHandler={modalHandler}
-          />
+          <Task task={task} key={idx} modalHandler={modalHandler} />
         ))}
       </section>
     </main>
