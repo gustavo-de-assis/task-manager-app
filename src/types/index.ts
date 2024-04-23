@@ -1,13 +1,20 @@
-type TaskModel = {
+import { Dispatch, SetStateAction } from "react";
+
+export type TaskModel = {
   id: number;
   title: string;
   description: string;
   deadline: string;
 };
 
-type TaskInfo = Omit<TaskModel, "id">;
+export type TaskInfo = Omit<TaskModel, "id">;
 
-type ModalInfo = {
+export type ModalType = {
   visibility: string;
   type: string;
+};
+
+export type ModalInfo = {
+  modal: ModalType;
+  setModal: Dispatch<SetStateAction<ModalType>>;
 };
