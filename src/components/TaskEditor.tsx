@@ -59,14 +59,18 @@ export default function TaskEditor() {
     try {
       const url = `http://localhost:4000/tasks/${selectedTask?.id}`;
       await axios.put(url, taskInfo);
+      Swal.fire({
+        icon: "success",
+        title: "Sucesso!",
+        text: "Tarefa Atualizada!",
+      });
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Algo deu errado!",
-        footer: "",
+        footer: error.response.data.message,
       });
-      console.log(error.response.message);
     }
   }
 
@@ -74,8 +78,18 @@ export default function TaskEditor() {
     try {
       const url = "http://localhost:4000/tasks";
       await axios.post(url, taskInfo);
+      Swal.fire({
+        icon: "success",
+        title: "Sucesso!",
+        text: "Tarefa Criada!",
+      });
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo deu errado!",
+        footer: error.response.data.message,
+      });
     }
   }
 
