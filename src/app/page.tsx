@@ -1,31 +1,20 @@
 "use client";
 
 import ModalContainer from "@/components/ModalContainer";
-import Modal from "@/components/ModalContainer";
 import NewTaskButton from "@/components/NewTaskButton";
 import TaskListContainer from "@/components/TaskListContainer";
-import { ModalType } from "@/types";
-import { useState } from "react";
+import { ModalContext } from "@/contexts/ModalContext";
+import { useContext } from "react";
 
 export default function Home() {
-  const [modal, setModal] = useState<ModalType>({
-    visibility: "invisible",
-    type: "view",
-  });
-
-  const modalHandler = (visibility: string, type: string) => {
-    setModal({
-      visibility,
-      type,
-    });
-  };
+  const { modal } = useContext(ModalContext);
 
   return (
     //APP
     <main className="w-full h-full">
       {/*MODAL*/}
       <section className={`absolute z-10 ${modal.visibility}`}>
-        <ModalContainer modal={modal} setModal={setModal} />
+        <ModalContainer />
       </section>
 
       {/*CONTENT*/}
@@ -35,12 +24,12 @@ export default function Home() {
         </header>
         <section className="flex flex-col items-center gap-5">
           {/*CONTAINER DE TAREFAS*/}
-          <TaskListContainer modalHandler={modalHandler} />
+          <TaskListContainer />
 
           {/*BOTÃO NOVA TAREFA */}
           <aside className="flex flex-col items-center w-36 h-36 gap-3">
             <h2 className="font-normal text-xl">Nova Tarefa</h2>
-            <NewTaskButton modalHandler={modalHandler} />
+            <NewTaskButton />
           </aside>
         </section>
       </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { M_PLUS_Code_Latin } from "next/font/google";
 import "./globals.css";
 import { TaskProvider } from "@/contexts/TaskContext";
+import { ModalProvider } from "@/contexts/ModalContext";
 
 const mPlus = M_PLUS_Code_Latin({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={mPlus.className}>
-        <TaskProvider>{children}</TaskProvider>
+        <ModalProvider>
+          <TaskProvider>{children}</TaskProvider>
+        </ModalProvider>
       </body>
     </html>
   );

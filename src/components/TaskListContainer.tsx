@@ -1,11 +1,12 @@
-import { ReactNode, useEffect, useState } from "react";
-import TaskContainer from "./TaskContainer";
+import { useEffect, useState } from "react";
+import TaskItem from "./TaskItem";
 import { MdFilterAlt } from "react-icons/md";
 import axios from "axios";
-import { ModalInfo, TaskModel } from "@/types";
+import { TaskModel } from "@/types";
 
-export default function TaskListContainer(props: ModalInfo): ReactNode {
+export default function TaskListContainer() {
   const [taskList, setTaskList] = useState<TaskModel[]>([]);
+
   useEffect(() => {
     const URL = "http://localhost:4000/tasks";
     axios
@@ -26,7 +27,13 @@ export default function TaskListContainer(props: ModalInfo): ReactNode {
       </div>
       <section className="flex flex-col items-center w-full h-3/5 overflow-y-scroll gap-3 pt-1">
         {taskList.map((task, idx) => (
-          <TaskContainer task={task} key={idx} modal={props} />
+          <TaskItem
+            deadline={task.deadline}
+            description={task.description}
+            title={task.title}
+            id={task.id}
+            key={idx}
+          />
         ))}
       </section>
     </main>

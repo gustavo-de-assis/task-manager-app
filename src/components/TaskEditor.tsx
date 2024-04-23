@@ -8,24 +8,14 @@ import { TaskModel } from "@/types";
 
 type TaskParams = Omit<TaskModel, "id">;
 
-export default function NewTask({ info }: { info?: TaskModel }) {
+export default function TaskEditor() {
   const [taskInfo, setTaskInfo] = useState<TaskParams>({
     title: "",
     description: "",
     deadline: "",
   });
 
-  useEffect(() => {
-    if (info) {
-      setTaskInfo({
-        title: info.title || "",
-        description: info.description || "",
-        deadline: info.deadline || "",
-      });
-    }
-
-    console.log(info);
-  }, [info]);
+  useEffect(() => {}, []);
 
   async function formHandler(
     e: React.ChangeEvent<HTMLFormElement>
