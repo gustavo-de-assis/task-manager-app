@@ -66,7 +66,7 @@ export default function TaskEditor() {
         text: "Algo deu errado!",
         footer: "",
       });
-      console.log(error.response);
+      console.log(error.response.message);
     }
   }
 
