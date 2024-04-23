@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import { MdFilterAlt } from "react-icons/md";
@@ -11,8 +13,6 @@ export default function TaskListContainer() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<TaskFilters>({});
 
-  // useEffect(() => {}, [showFilters]);
-
   useEffect(() => {
     const queryString = setQueryParams();
     const URL = `http://localhost:4000/tasks`;
@@ -24,7 +24,7 @@ export default function TaskListContainer() {
       .catch((err) => {
         alert(err.response.data.message);
       });
-  }, [showFilters]);
+  }, [showFilters, taskList]);
 
   function setQueryParams() {
     const queryParams = [];
@@ -60,15 +60,19 @@ export default function TaskListContainer() {
         <p className="text-xs">Filtros</p>
       </div>
       <section className="flex flex-col items-center w-full h-3/5 overflow-y-scroll gap-3 pt-1">
-        {taskList.map((task, idx) => (
-          <TaskItem
-            deadline={task.deadline}
-            description={task.description}
-            title={task.title}
-            id={task.id}
-            key={idx}
-          />
-        ))}
+        {taskList.length !== 0 ? (
+          taskList.map((task, idx) => (
+            <TaskItem
+              deadline={task.deadline}
+              description={task.description}
+              title={task.title}
+              id={task.id}
+              key={idx}
+            />
+          ))
+        ) : (
+          <></>
+        )}
       </section>
     </main>
   );

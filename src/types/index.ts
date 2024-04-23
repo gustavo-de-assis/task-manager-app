@@ -19,9 +19,9 @@ export type ModalInfo = {
   setModal: Dispatch<SetStateAction<ModalType>>;
 };
 
-export type UpdateTaskModel = {
+export type TaskItemProps = {
   task: TaskModel;
-  setTask: Dispatch<SetStateAction<TaskModel>>;
+  deleteTask: () => void;
 };
 
 export type TaskContainerProps = {
