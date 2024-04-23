@@ -36,7 +36,7 @@ export default function Home() {
           </aside>
 
           {/*CONTAINER DE TAREFAS*/}
-          <section className="flex flex-col items-center w-full h-full ">
+          <section className="flex flex-col items-center w-full h-full">
             <header className="flex justify-center pt-8 mb-14">
               <h1 className="font-normal text-5xl sm:text-6xl">To Do List</h1>
             </header>
