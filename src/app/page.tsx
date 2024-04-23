@@ -22,7 +22,7 @@ export default function Home() {
       {/*CONTENT*/}
       <div className={modal.visibility === "visible" ? `filter blur-sm` : ""}>
         <header className="flex justify-center pt-8 mb-14">
-          <h1 className="font-normal text-5xl">To Do List</h1>
+          <h1 className="font-normal text-5xl sm:text-6xl">To Do List</h1>
         </header>
         <section className="flex flex-col items-center gap-5">
           {/*CONTAINER DE TAREFAS*/}
@@ -30,7 +30,7 @@ export default function Home() {
 
           {/*BOTÃO NOVA TAREFA */}
           <aside className="flex flex-col items-center w-36 h-36 gap-3">
-            <h2 className="font-normal text-xl">Nova Tarefa</h2>
+            <h2 className="font-normal text-xl sm:text-2xl">Nova Tarefa</h2>
             <NewTaskButton />
           </aside>
         </section>

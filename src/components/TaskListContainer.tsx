@@ -45,7 +45,7 @@ export default function TaskListContainer() {
   }
 
   return (
-    <main className="flex flex-col items-center w-80 h-96 bg-[#f8f8f8] shadow-md gap-8">
+    <main className="flex flex-col items-center w-80 sm:w-96 h-96 sm:h-[410px] bg-[#f8f8f8] shadow-md gap-8">
       <div className="flex flex-col h-12 items-start justify-center ml-3 mt-3 w-full relative">
         <IconButton Icon={MdFilterAlt} handler={toggleShowFilters} size={20} />
         {showFilters ? (
