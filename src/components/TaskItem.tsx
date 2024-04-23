@@ -52,7 +52,7 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
   }
 
   return (
-    <main className="flex flex-row justify-between items-center w-11/12 min-h-5 max-h-5 sm:min-h-6 sm:max-h-6 border-b-2 border-black relative">
+    <main className="flex flex-row justify-between items-center w-11/12 min-h-5 max-h-5 sm:min-h-6 sm:max-h-6 lg:min-h-10 lg:max-h-10 border-b-2 border-black relative">
       <span className="flex absolute left-1 gap-1">
         <IconButton
           Icon={TbEyeSearch}
@@ -62,10 +62,10 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
           }}
           size={20}
         />
-        <h2 className="text-sm sm:text-md ml-1">{title}</h2>
+        <h2 className="text-sm sm:text-md lg:text-xl ml-1">{title}</h2>
       </span>
       <span className="flex absolute right-1 gap-1">
-        <h2 className="text-xs sm:text-sm">{formattedDeadline}</h2>
+        <h2 className="text-xs sm:text-sm lg:text-xl">{formattedDeadline}</h2>
         <IconButton
           Icon={TbTrash}
           handler={() => {

@@ -30,15 +30,17 @@ export default function Home() {
       >
         <section className="flex flex-row items-center justify-evenly gap-5">
           {/*BOTÃO NOVA TAREFA */}
-          <aside className="flex flex-col items-center w-64 h-36 gap-3">
-            <h2 className="font-normal text-2xl">Nova Tarefa</h2>
+          <aside className="flex flex-col items-center justify-center w-64 h-64 gap-3 ml-12">
+            <h2 className="font-normal text-3xl">Nova Tarefa</h2>
             <NewTaskButton />
           </aside>
 
           {/*CONTAINER DE TAREFAS*/}
           <section className="flex flex-col items-center w-full h-full">
             <header className="flex justify-center pt-8 mb-14">
-              <h1 className="font-normal text-5xl sm:text-6xl">To Do List</h1>
+              <h1 className="font-normal text-5xl sm:text-6xl lg:text-8xl">
+                To Do List
+              </h1>
             </header>
             <TaskListContainer />
           </section>

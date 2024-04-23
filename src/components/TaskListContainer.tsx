@@ -45,8 +45,8 @@ export default function TaskListContainer() {
   }
 
   return (
-    <main className="flex flex-col items-center w-80 sm:w-96 md:w-[500px] lg:w-3/4 h-96 sm:h-[410px] lg:h-[500px]  bg-[#f8f8f8] shadow-md gap-8">
-      <div className="flex flex-col h-12 items-start justify-center ml-3 mt-3 w-full relative">
+    <main className="flex flex-col items-center w-80 sm:w-96 md:w-[500px] lg:w-3/4 h-96 sm:h-[410px] lg:h-[600px]  bg-[#f8f8f8] shadow-md gap-8">
+      <div className="flex flex-col h-12 items-start justify-center ml-3 lg:ml-5 mt-3 w-full relative">
         <IconButton Icon={MdFilterAlt} handler={toggleShowFilters} size={20} />
         {showFilters ? (
           <FilterComponent
@@ -57,7 +57,7 @@ export default function TaskListContainer() {
         ) : (
           <></>
         )}
-        <p className="text-xs lg:text-sm">Filtros</p>
+        <p className="text-xs lg:text-lg">Filtros</p>
       </div>
       <section className="flex flex-col items-center w-full h-3/5 overflow-y-scroll gap-3 pt-1">
         {taskList.length !== 0 ? (

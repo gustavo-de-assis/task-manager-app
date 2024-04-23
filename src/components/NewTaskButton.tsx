@@ -8,7 +8,7 @@ export default function NewTaskButton() {
 
   return (
     <main
-      className="flex justify-center items-center w-28 h-28 bg-cover bg-center text-5xl font-light hover:cursor-pointer hover:opacity-80"
+      className="flex justify-center items-center w-28 lg:w-36 h-28 lg:h-36 bg-cover bg-center text-5xl lg:text-6xl font-light hover:cursor-pointer hover:opacity-80"
       style={{ backgroundImage: `url('../../assets/images/post_it.png')` }}
       onClick={() => {
         setSelectedTask(null);

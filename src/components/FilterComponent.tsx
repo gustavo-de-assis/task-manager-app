@@ -23,7 +23,7 @@ export default function FilterComponent(props: FilterState): ReactNode {
       className="flex flex-row items-center w-48 h-16 bg-[#f8f8f8] absolute top-6 gap-2"
     >
       <div className="h-full ">
-        <p className="text-xs">Título</p>
+        <p className="text-xs lg:text-sm">Título</p>
         <select
           name="title"
           value={filters.title}
@@ -35,7 +35,7 @@ export default function FilterComponent(props: FilterState): ReactNode {
         </select>
       </div>
       <div className="h-full ">
-        <p className="text-xs">Prazo</p>
+        <p className="text-xs lg:text-sm">Prazo</p>
         <select
           name="deadline"
           value={filters.deadline}
