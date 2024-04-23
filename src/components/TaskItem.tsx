@@ -2,14 +2,14 @@
 
 import { TbEyeSearch, TbTrash } from "react-icons/tb";
 import IconButton from "./IconButton";
-import { TaskItemProps } from "@/types";
+import { TaskModel } from "@/types";
 import { ReactNode, useContext } from "react";
 import { ModalContext } from "@/contexts/ModalContext";
 import { TaskContext } from "@/contexts/TaskContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function TaskItem(props: Readonly<TaskItemProps>): ReactNode {
+export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
   const { title, deadline, id } = props;
   const { setModal } = useContext(ModalContext);
   const { setSelectedTask } = useContext(TaskContext);
@@ -58,7 +58,7 @@ export default function TaskItem(props: Readonly<TaskItemProps>): ReactNode {
           Icon={TbEyeSearch}
           handler={() => {
             setModal({ visibility: "visible", type: "view" });
-            setSelectedTask({ ...props.task, deadline: formattedDeadline });
+            setSelectedTask({ ...props, deadline: formattedDeadline });
           }}
           size={20}
         />
@@ -69,7 +69,6 @@ export default function TaskItem(props: Readonly<TaskItemProps>): ReactNode {
         <IconButton
           Icon={TbTrash}
           handler={() => {
-            () => update;
             deleteTask();
           }}
           size={20}

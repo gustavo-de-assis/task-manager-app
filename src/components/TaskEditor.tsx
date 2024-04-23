@@ -10,6 +10,7 @@ import IconButton from "./IconButton";
 import { ModalContext } from "@/contexts/ModalContext";
 import { TaskContext } from "@/contexts/TaskContext";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 type TaskParams = Omit<TaskModel, "id">;
 
@@ -47,11 +48,11 @@ export default function TaskEditor() {
     e.preventDefault();
     if (modal.type === "new") {
       await createTask();
+      setModal({ ...modal, visibility: "invisible" });
     } else if (modal.type === "edit") {
       await updateTask();
+      setModal({ ...modal, visibility: "invisible" });
     }
-    console.log("Informações da tarefa:", taskInfo);
-    console.log("Informações Selecionado: ", selectedTask);
   }
 
   async function updateTask(): Promise<void> {
@@ -59,6 +60,12 @@ export default function TaskEditor() {
       const url = `http://localhost:4000/tasks/${selectedTask?.id}`;
       await axios.put(url, taskInfo);
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo deu errado!",
+        footer: "",
+      });
       console.log(error.response);
     }
   }
@@ -68,7 +75,7 @@ export default function TaskEditor() {
       const url = "http://localhost:4000/tasks";
       await axios.post(url, taskInfo);
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
     }
   }
 
