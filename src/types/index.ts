@@ -28,3 +28,14 @@ export type TaskContainerProps = {
   task: TaskModel;
   modal: ModalInfo;
 };
+
+export type TaskFilters = {
+  title?: "asc" | "desc";
+  deadline?: "asc" | "desc";
+};
+
+export type FilterState = {
+  filter: TaskFilters;
+  setFilter: Dispatch<SetStateAction<TaskFilters>>;
+  setShowFilter: Dispatch<SetStateAction<boolean>>;
+};
