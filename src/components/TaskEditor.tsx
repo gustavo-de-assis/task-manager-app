@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import IconButton from "./IconButton";
 import { BsSendCheck } from "react-icons/bs";
 import axios from "axios";
 import { TaskModel } from "@/types";
+import { ModalContext } from "@/contexts/ModalContext";
+import { TaskContext } from "@/contexts/TaskContext";
 
 type TaskParams = Omit<TaskModel, "id">;
 
@@ -14,8 +16,24 @@ export default function TaskEditor() {
     description: "",
     deadline: "",
   });
+  const { modal } = useContext(ModalContext);
+  const { selectedTask } = useContext(TaskContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (selectedTask !== null && modal.type === "edit") {
+      setTaskInfo({
+        title: selectedTask?.title,
+        description: selectedTask?.description,
+        deadline: selectedTask?.deadline,
+      });
+    } else {
+      setTaskInfo({
+        title: "",
+        description: "",
+        deadline: "",
+      });
+    }
+  }, [selectedTask]);
 
   async function formHandler(
     e: React.ChangeEvent<HTMLFormElement>
@@ -28,6 +46,7 @@ export default function TaskEditor() {
       console.log(error.response);
     }
     console.log("Informações da tarefa:", taskInfo);
+    console.log("Informações Selecionado: ", selectedTask);
   }
 
   return (
