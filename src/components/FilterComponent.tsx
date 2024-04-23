@@ -20,9 +20,9 @@ export default function FilterComponent(props: FilterState): ReactNode {
   return (
     <form
       onSubmit={onFormSubmit}
-      className="flex flex-row items-center w-32 bg-[#f8f8f8] absolute top-6 gap-2"
+      className="flex flex-row items-center w-48 h-16 bg-[#f8f8f8] absolute top-6 gap-2"
     >
-      <div className="h-6 bg-inherit">
+      <div className="h-full ">
         <p className="text-xs">Título</p>
         <select
           name="title"
@@ -34,7 +34,7 @@ export default function FilterComponent(props: FilterState): ReactNode {
           <option value={"desc"}>Z-A</option>
         </select>
       </div>
-      <div className="h-6 bg-inherit">
+      <div className="h-full ">
         <p className="text-xs">Prazo</p>
         <select
           name="deadline"
@@ -46,8 +46,12 @@ export default function FilterComponent(props: FilterState): ReactNode {
           <option value={"desc"}>mais longo</option>
         </select>
       </div>
-      <div className="h6 bg-inherit">
-        <input type="submit" value="OK" />
+      <div className="flex h-6 w-8 justify-center items-center">
+        <input
+          type="submit"
+          value="OK"
+          className="w-full h-full hover:cursor-pointer rounded border-[1px] border-black bg-zinc-300 mb-3"
+        />
       </div>
     </form>
   );

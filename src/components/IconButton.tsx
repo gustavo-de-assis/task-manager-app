@@ -11,7 +11,15 @@ export default function IconButton(props: Readonly<ButtonProps>) {
 
   return (
     <div>
-      <button>{Icon && <Icon size={size} onClick={handler} />}</button>
+      <button>
+        {Icon && (
+          <Icon
+            size={size}
+            onClick={handler}
+            className="hover:text-sky-900 hover:opacity-80"
+          />
+        )}
+      </button>
     </div>
   );
 }
