@@ -4,10 +4,12 @@ import ModalContainer from "@/components/ModalContainer";
 import NewTaskButton from "@/components/NewTaskButton";
 import TaskListContainer from "@/components/TaskListContainer";
 import { ModalContext } from "@/contexts/ModalContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function Home() {
   const { modal } = useContext(ModalContext);
+
+  useEffect(() => {}, [modal]);
 
   return (
     //APP

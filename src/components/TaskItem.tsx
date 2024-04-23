@@ -23,8 +23,8 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
         <IconButton
           Icon={TbEyeSearch}
           handler={() => {
-            setModal({ visibility: "visible", type: "edit" });
-            setSelectedTask(props);
+            setModal({ visibility: "visible", type: "view" });
+            setSelectedTask({ ...props, deadline: formattedDeadline });
           }}
           size={20}
         />

@@ -1,12 +1,15 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import IconButton from "./IconButton";
+
 import { BsSendCheck } from "react-icons/bs";
-import axios from "axios";
+import { TbPencilMinus } from "react-icons/tb";
+
 import { TaskModel } from "@/types";
+import IconButton from "./IconButton";
 import { ModalContext } from "@/contexts/ModalContext";
 import { TaskContext } from "@/contexts/TaskContext";
+import axios from "axios";
 
 type TaskParams = Omit<TaskModel, "id">;
 
@@ -16,11 +19,14 @@ export default function TaskEditor() {
     description: "",
     deadline: "",
   });
-  const { modal } = useContext(ModalContext);
+  const { modal, setModal } = useContext(ModalContext);
   const { selectedTask } = useContext(TaskContext);
 
   useEffect(() => {
-    if (selectedTask !== null && modal.type === "edit") {
+    if (
+      selectedTask !== null &&
+      (modal.type === "edit" || modal.type === "view")
+    ) {
       setTaskInfo({
         title: selectedTask?.title,
         description: selectedTask?.description,
@@ -33,20 +39,37 @@ export default function TaskEditor() {
         deadline: "",
       });
     }
-  }, [selectedTask]);
+  }, [selectedTask, modal]);
 
   async function formHandler(
     e: React.ChangeEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
+    if (modal.type === "new") {
+      await createTask();
+    } else if (modal.type === "edit") {
+      await updateTask();
+    }
+    console.log("Informações da tarefa:", taskInfo);
+    console.log("Informações Selecionado: ", selectedTask);
+  }
+
+  async function updateTask(): Promise<void> {
+    try {
+      const url = `http://localhost:4000/tasks/${selectedTask?.id}`;
+      await axios.put(url, taskInfo);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
+  async function createTask(): Promise<void> {
     try {
       const url = "http://localhost:4000/tasks";
       await axios.post(url, taskInfo);
     } catch (error) {
       console.log(error.response);
     }
-    console.log("Informações da tarefa:", taskInfo);
-    console.log("Informações Selecionado: ", selectedTask);
   }
 
   return (
@@ -54,58 +77,79 @@ export default function TaskEditor() {
       className="w-80 h-80 bg-cover bg-center font-light relative"
       style={{ backgroundImage: `url('../../assets/images/post_it.png')` }}
     >
-      <form className="absolute top-5 left-9 w-64" onSubmit={formHandler}>
-        <input
-          className="h-16 w-full mb-6 text-center bg-transparent font-medium text-2xl"
-          type="text"
-          maxLength={20}
-          placeholder="#Título"
-          value={taskInfo.title}
-          onChange={(e) => {
-            setTaskInfo({
-              ...taskInfo,
-              title: e.target.value,
-            });
-          }}
-          required
-        />
-        <textarea
-          className="flex flex-wrap h-32 w-full mb-3 text-start bg-transparent font-normal text-md px-1 resize-none"
-          rows={3}
-          cols={50}
-          maxLength={200}
-          placeholder="#Descrição da tarefa"
-          value={taskInfo.description}
-          onChange={(e) => {
-            setTaskInfo({
-              ...taskInfo,
-              description: e.target.value,
-            });
-          }}
-          required
-        />
-        <div className="flex justify-between">
+      {modal.type === "view" ? (
+        <section className="absolute top-5 left-9 w-64">
+          <div className="h-16 w-full mb-6 text-center bg-transparent font-medium text-2xl">
+            {selectedTask?.title}
+          </div>
+          <div className="flex flex-wrap h-32 w-full mb-3 text-start bg-transparent font-normal text-md px-1">
+            {selectedTask?.description}
+          </div>
+          <div className="flex justify-between">
+            <div>{selectedTask?.deadline}</div>
+            <div className="h-7 w-7 rounded mr-3">
+              <IconButton
+                Icon={TbPencilMinus}
+                handler={() => setModal({ ...modal, type: "edit" })}
+                size={20}
+              />
+            </div>
+          </div>
+        </section>
+      ) : (
+        <form className="absolute top-5 left-9 w-64" onSubmit={formHandler}>
           <input
-            className="bg-transparent"
-            type="date"
-            alt="prazo"
-            value={taskInfo.deadline}
+            className="h-16 w-full mb-6 text-center bg-transparent font-medium text-2xl"
+            type="text"
+            maxLength={20}
+            placeholder="#Título"
+            value={taskInfo.title}
             onChange={(e) => {
               setTaskInfo({
                 ...taskInfo,
-                deadline: e.target.value,
+                title: e.target.value,
               });
             }}
+            required
           />
-          <div className="h-7 w-7 rounded mr-3">
-            <IconButton
-              Icon={BsSendCheck}
-              handler={() => formHandler}
-              size={20}
+          <textarea
+            className="flex flex-wrap h-32 w-full mb-3 text-start bg-transparent font-normal text-md px-1 resize-none"
+            rows={3}
+            cols={50}
+            maxLength={200}
+            placeholder="#Descrição da tarefa"
+            value={taskInfo.description}
+            onChange={(e) => {
+              setTaskInfo({
+                ...taskInfo,
+                description: e.target.value,
+              });
+            }}
+            required
+          />
+          <div className="flex justify-between">
+            <input
+              className="bg-transparent"
+              type="date"
+              alt="prazo"
+              value={taskInfo.deadline}
+              onChange={(e) => {
+                setTaskInfo({
+                  ...taskInfo,
+                  deadline: e.target.value,
+                });
+              }}
             />
+            <div className="h-7 w-7 rounded mr-3">
+              <IconButton
+                Icon={BsSendCheck}
+                handler={() => formHandler}
+                size={20}
+              />
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      )}
     </main>
   );
 }
