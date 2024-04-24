@@ -21,34 +21,35 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
     year: "numeric",
   });
 
-  async function deleteRequest() {
+  async function deleteTask() {
     const url = `http://localhost:4000/tasks/${id}`;
     try {
-      await axios.delete(url);
+      Swal.fire({
+        title: "Tem certeza?",
+        text: "Você não poderá reverter a ação!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, deletar!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete(url);
+          Swal.fire({
+            title: "Pronto!",
+            text: "Sua tarefa foi deletada.",
+            icon: "success",
+          });
+        }
+      });
     } catch (error) {
-      console.error("Error deleting task: ", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo deu errado!",
+        footer: error.response.data.message,
+      });
     }
-  }
-
-  async function deleteTask() {
-    Swal.fire({
-      title: "Tem certeza?",
-      text: "Você não poderá reverter a ação!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sim, deletar!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteRequest();
-        Swal.fire({
-          title: "Pronto!",
-          text: "Sua tarefa foi deletada.",
-          icon: "success",
-        });
-      }
-    });
   }
 
   return (

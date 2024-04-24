@@ -95,18 +95,18 @@ export default function TaskEditor() {
 
   return (
     <main
-      className="w-80 h-80 bg-cover bg-center font-light relative"
+      className="w-80 lg:w-96 h-80 lg:h-96 bg-cover bg-center font-light relative"
       style={{ backgroundImage: `url('../../assets/images/post_it.png')` }}
     >
       {modal.type === "view" ? (
-        <section className="absolute top-5 left-9 w-64">
-          <div className="h-16 w-full mb-6 text-center bg-transparent font-medium text-2xl">
+        <section className="absolute top-5 lg:top-8 left-9 lg:left-11 w-64 lg:w-72">
+          <div className="h-16 w-full mb-6 text-center bg-transparent font-medium text-2xl lg:text-5xl">
             {selectedTask?.title}
           </div>
-          <div className="flex flex-wrap h-32 w-full mb-3 text-start bg-transparent font-normal text-md px-1">
+          <div className="flex flex-wrap h-32 lg:h-44 w-full mb-3 text-start bg-transparent font-normal text-md lg:text-2xl px-1">
             {selectedTask?.description}
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between lg:text-xl">
             <div>{selectedTask?.deadline}</div>
             <div className="h-7 w-7 rounded mr-3">
               <IconButton
@@ -118,9 +118,12 @@ export default function TaskEditor() {
           </div>
         </section>
       ) : (
-        <form className="absolute top-5 left-9 w-64" onSubmit={formHandler}>
+        <form
+          className="absolute top-5 lg:top-8 left-9 lg:left-11 w-64 lg:w-72"
+          onSubmit={formHandler}
+        >
           <input
-            className="h-16 w-full mb-6 text-center bg-transparent font-medium text-2xl"
+            className="h-16 w-full mb-6 text-center bg-transparent font-medium text-2xl lg:text-5xl"
             type="text"
             maxLength={20}
             placeholder="#Título"
@@ -134,7 +137,7 @@ export default function TaskEditor() {
             required
           />
           <textarea
-            className="flex flex-wrap h-32 w-full mb-3 text-start bg-transparent font-normal text-md px-1 resize-none"
+            className="flex flex-wrap h-32 lg:h-44 w-full mb-3 text-start bg-transparent font-normal text-md lg:text-2xl px-1 resize-none"
             rows={3}
             cols={50}
             maxLength={200}
