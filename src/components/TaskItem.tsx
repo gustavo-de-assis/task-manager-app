@@ -47,7 +47,7 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
         icon: "error",
         title: "Oops...",
         text: "Algo deu errado!",
-        footer: error.response.data.message,
+        footer: error.response.data,
       });
     }
   }
