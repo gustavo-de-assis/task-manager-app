@@ -16,6 +16,7 @@ export default function TaskItem(props: Readonly<TaskModel>): ReactNode {
 
   const deadlineDate = new Date(deadline);
   const formattedDeadline = deadlineDate.toLocaleDateString("pt-BR", {
+    timeZone: "UTC",
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
