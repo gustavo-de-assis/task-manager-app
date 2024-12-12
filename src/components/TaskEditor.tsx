@@ -69,7 +69,7 @@ export default function TaskEditor() {
         icon: "error",
         title: "Oops...",
         text: "Algo deu errado!",
-        footer: error.response.data.message,
+        footer: error.response.data,
       });
     }
   }
@@ -88,7 +88,7 @@ export default function TaskEditor() {
         icon: "error",
         title: "Oops...",
         text: "Algo deu errado!",
-        footer: error.response.data.message,
+        footer: error.response.data,
       });
     }
   }

@@ -22,7 +22,7 @@ export default function TaskListContainer() {
         setTaskList(ans.data);
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        alert(err.response.data);
       });
   }, [showFilters, taskList]);
 
